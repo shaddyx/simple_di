@@ -24,5 +24,6 @@ func TestContainer_IterateInstances(t *testing.T) {
 		return nil
 	})
 	assert.Equal(t, 2, len(called))
-	assert.Equal(t, []string{"service1", "service2"}, called)
+	assert.Contains(t, called, "service1")
+	assert.Contains(t, called, "service2")
 }

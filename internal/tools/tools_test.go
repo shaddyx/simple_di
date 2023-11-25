@@ -98,3 +98,22 @@ func TestGetReferenceType(t *testing.T) {
 	res = GetReferenceType(t1)
 	assert.Equal(t, "Test", res.Name())
 }
+
+func TestGetQualifier(t *testing.T) {
+	type Test struct {
+	}
+	assert.Equal(t, "github.com.shaddyx.simple_di.internal.tools.Test", GetQualifier[Test]())
+}
+
+func TestGetQualifierI(t *testing.T) {
+	type TestI interface {
+	}
+
+	assert.Equal(t, "github.com.shaddyx.simple_di.internal.tools.TestI", GetQualifier[TestI]())
+}
+
+func TestGetInterfaceType(t *testing.T) {
+	type TestI interface {
+	}
+	assert.Equal(t, "TestI", GetInterfaceType[TestI]().Name())
+}

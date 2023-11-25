@@ -53,3 +53,4 @@ func Test_simpleInjectFunctionalInitializer(t *testing.T) {
 
 	assert.True(t, called)
 }
+

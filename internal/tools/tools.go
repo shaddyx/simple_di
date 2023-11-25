@@ -11,7 +11,12 @@ func GetInstanceType(v any) string {
 		v = &v
 	}
 	if IsType(v) {
-		return v.(reflect.Type).Elem().Name()
+		if v.(reflect.Type).Kind() == reflect.Interface {
+			return v.(reflect.Type).Name()
+		} else {
+			return v.(reflect.Type).Elem().Name()
+		}
+
 	}
 	return reflect.ValueOf(v).Type().Elem().Name()
 }
@@ -22,7 +27,11 @@ func GetInstancePackage(v any) string {
 	}
 	var path string
 	if IsType(v) {
-		path = v.(reflect.Type).Elem().PkgPath()
+		if v.(reflect.Type).Kind() == reflect.Interface {
+			path = v.(reflect.Type).PkgPath()
+		} else {
+			path = v.(reflect.Type).Elem().PkgPath()
+		}
 	} else {
 		path = reflect.ValueOf(v).Type().Elem().PkgPath()
 	}
@@ -46,7 +55,7 @@ func GetInterfacePackage[T any]() string {
 }
 
 func GetQualifier[T any]() string {
-	return fmt.Sprintf("%s.%s", GetInterfacePackage[T](), GetInterfaceType[T]())
+	return fmt.Sprintf("%s.%s", GetInterfacePackage[T](), GetInterfaceType[T]().Name())
 }
 
 func GetStructTag(f reflect.StructField, tagName string) string {
