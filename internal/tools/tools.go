@@ -17,7 +17,7 @@ func GetInstanceType(v any) string {
 }
 
 func GetInstancePackage(v any) string {
-	if !IsRef(v) {
+	if !IsRef(v) && !IsInterface(v) && v != nil{
 		v = &v
 	}
 	var path string
@@ -46,7 +46,8 @@ func GetInterfacePackage[T any]() string {
 }
 
 func GetQualifier[T any]() string {
-	return fmt.Sprintf("%s.%s", GetInterfacePackage[T](), GetInterfaceType[T]())
+	//return GetInterfaceType[T]().String()
+	return fmt.Sprintf("%s.%s", GetInterfacePackage[T](), GetInterfaceType[T]().Name())
 }
 
 func GetStructTag(f reflect.StructField, tagName string) string {
@@ -67,3 +68,4 @@ func GetFunctionReturnType(fn any, num int) reflect.Type {
 func GetReferenceType(ref any) reflect.Type {
 	return reflect.Indirect(reflect.ValueOf(ref)).Type()
 }
+

@@ -33,12 +33,6 @@ func TestGetInstanceQualifierStruct(t *testing.T) {
 	assert.Equal(t, ".", res)
 }
 
-func TestIsRef(t *testing.T) {
-	type Test struct {
-	}
-	assert.True(t, IsRef(&Test{}))
-	assert.False(t, IsRef(Test{}))
-}
 
 type Test2 struct {
 }
@@ -97,4 +91,11 @@ func TestGetReferenceType(t *testing.T) {
 	var t1 Test1 = &Test{}
 	res = GetReferenceType(t1)
 	assert.Equal(t, "Test", res.Name())
+}
+
+func TestGetInstancePackageIf(t *testing.T) {
+	type TestIf interface {
+	}
+
+	assert.Equal(t, "simpledi.internal.tools", GetInstancePackage((TestIf)(nil)))
 }

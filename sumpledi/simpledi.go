@@ -103,8 +103,8 @@ func tryToGetTheName(r types.Provider) (string, error) {
 
 	if tools.IsFunc(r.Initializer) {
 		t := tools.GetFunctionReturnType(r.Initializer, 0)
-		if t.Kind() != reflect.Ptr {
-			return "", fmt.Errorf("initializer should be a pointer: %v", r.Initializer)
+		if t.Kind() != reflect.Ptr && t.Kind() != reflect.Interface {
+			return "", fmt.Errorf("initializer should be a pointer or an interface: %v", r.Initializer)
 		}
 		name := tools.GetInstanceQualifier(t)
 		log.Println("provider name: ", name)
