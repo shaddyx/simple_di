@@ -1,7 +1,6 @@
 package simple_di
 
 import (
-	"fmt"
 	"log"
 	"maps"
 	"reflect"
@@ -43,7 +42,6 @@ func inject(object any, container *Container) error {
 		log.Printf("injecting %s -> %s", tag, name)
 		f, err := container.GetByName(tag)
 		if err != nil {
-			fmt.Println(err)
 			return err
 		}
 		err = tools.SetValue(object, field.Name, f)

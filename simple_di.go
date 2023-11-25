@@ -31,8 +31,12 @@ func (c *Container) GetInstances() map[string]any {
 }
 
 func (c *Container) IterateInstances(f func(string, any) error) error {
-	for k, v := range c.instanceMap {
-		if err := f(k, v.Obj); err != nil {
+	for k := range c.instanceMap {
+		instance, err := c.GetByName(k)
+		if err != nil {
+			return err
+		}
+		if err = f(k, instance); err != nil {
 			return err
 		}
 	}
