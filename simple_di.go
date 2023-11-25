@@ -18,6 +18,23 @@ func NewContainer() *Container {
 	}
 }
 
+func (c *Container) GetInstances() map[string]any {
+	res := make(map[string]any)
+	for k, v := range c.instanceMap {
+		res[k] = v.Obj
+	}
+	return res
+}
+
+func (c *Container) IterateInstances(f func(string, any) error) error {
+	for k, v := range c.instanceMap {
+		if err := f(k, v.Obj); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (c *Container) AddFuncByName(name string, initializer func(*Container) any) *Container {
 	c.initializerMap[name] = initializer
 	return c
