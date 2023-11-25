@@ -1,6 +1,6 @@
 module github.com/shaddyx/simple_di
 
-go 1.21.4
+go 1.20.1
 
 require github.com/stretchr/testify v1.8.4
 
