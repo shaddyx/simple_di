@@ -1,6 +1,10 @@
 package simple_di
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/shaddyx/simple_di/internal/tools"
+)
 
 type ObjectInstance struct {
 	Obj      any
@@ -39,9 +43,15 @@ func (c *Container) AddFuncByName(name string, initializer func(*Container) any)
 	c.initializerMap[name] = initializer
 	return c
 }
+func (c *Container) AddByType(service ...any) *Container {
+	for _, s := range service {
+		c.AddByName(tools.GetInstanceQualifier(s), s)
+	}
+	return c
+}
 
 func (c *Container) AddByName(name string, service any) *Container {
-	if IsFunc(service) {
+	if tools.IsFunc(service) {
 		panic("Please use AddFuncByName for func initializers instead")
 	}
 

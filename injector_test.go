@@ -27,10 +27,10 @@ func Test_simpleInject(t *testing.T) {
 		AddByName("service1", s1).
 		AddByName("service2", s2)
 	s2Got := container.GetPanic("service2").(*ServiceWithInjects)
-	assert.Equal(t, s2Got.S1, s1)
-	assert.Equal(t, s2Got.S2, s1)
-	assert.Equal(t, s2Got.S3, s1)
-	assert.Equal(t, s2Got.S4, s1)
+	assert.Equal(t, s1, s2Got.S1)
+	assert.Equal(t, s1, s2Got.S2)
+	assert.Equal(t, s1, s2Got.S3)
+	assert.Equal(t, s1, s2Got.S4)
 
 }
 
@@ -45,9 +45,11 @@ func Test_simpleInjectFunctionalInitializer(t *testing.T) {
 		}).
 		AddByName("service2", s2)
 	s2Got := container.GetPanic("service2").(*ServiceWithInjects)
-	assert.Equal(t, s2Got.S1, s1)
-	assert.Equal(t, s2Got.S2, s1)
-	assert.Equal(t, s2Got.S3, s1)
-	assert.Equal(t, s2Got.S4, s1)
+	// replace expected asserts with actual
+	assert.Equal(t, s1, s2Got.S1)
+	assert.Equal(t, s1, s2Got.S2)
+	assert.Equal(t, s1, s2Got.S3)
+	assert.Equal(t, s1, s2Got.S4)
+
 	assert.True(t, called)
 }

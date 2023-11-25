@@ -3,6 +3,7 @@ package simple_di
 import (
 	"testing"
 
+	"github.com/shaddyx/simple_di/internal/tools"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -43,8 +44,8 @@ func TestIsFunc(t *testing.T) {
 
 	}
 
-	assert.True(t, IsFunc(testFunc))
-	assert.False(t, IsFunc(1))
-	assert.False(t, IsFunc(Service1{}))
-	assert.False(t, IsFunc(&Service1{}))
+	assert.True(t, tools.IsFunc(testFunc))
+	assert.False(t, tools.IsFunc(1))
+	assert.False(t, tools.IsFunc(Service1{}))
+	assert.False(t, tools.IsFunc(&Service1{}))
 }
