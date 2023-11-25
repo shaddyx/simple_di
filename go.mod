@@ -1,6 +1,6 @@
-module simpledi
+module simple_di
 
-go 1.21.3
+go 1.21.4
 
 require github.com/stretchr/testify v1.8.4
 
