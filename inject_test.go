@@ -3,7 +3,7 @@ package simple_di
 import (
 	"testing"
 
-	"github.com/shaddyx/simple_di/internal/tools"
+	"github.com/shaddyx/simple_di/tools"
 	"github.com/stretchr/testify/assert"
 )
 

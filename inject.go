@@ -5,7 +5,7 @@ import (
 	"maps"
 	"reflect"
 
-	"github.com/shaddyx/simple_di/internal/tools"
+	"github.com/shaddyx/simple_di/tools"
 )
 
 func getAllFields(object any) map[string]reflect.StructField {

@@ -3,7 +3,7 @@ package simple_di
 import (
 	"fmt"
 
-	"github.com/shaddyx/simple_di/internal/tools"
+	"github.com/shaddyx/simple_di/tools"
 )
 
 type ObjectInstance struct {
