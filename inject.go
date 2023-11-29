@@ -1,6 +1,7 @@
 package simple_di
 
 import (
+	"fmt"
 	"log"
 	"maps"
 	"reflect"
@@ -39,10 +40,11 @@ func inject(object any, container *Container) error {
 		if tag == "autoinject" {
 			tag = tools.GetInstanceQualifier(field.Type)
 		}
-		log.Printf("injecting %s -> %s", tag, name)
+		log.Printf("injecting %s <- %s", tag, name)
 		f, err := container.GetByName(tag)
 		if err != nil {
-			return err
+			targetName := tools.GetInstanceQualifier(object)
+			return fmt.Errorf("failed to inject %s -> %s: %w", targetName, tag, err)
 		}
 		err = tools.SetValue(object, field.Name, f)
 		if err != nil {
